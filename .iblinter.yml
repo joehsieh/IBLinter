@@ -1,0 +1,10 @@
+enbled_rules:
+  - relative_to_margin
+  - misplaced
+  - enable_autolayout
+  - duplicate_constraint
+  - duplicate_color
+disabled_rules:
+  - custom_class_name
+excluded:
+  - Carthage

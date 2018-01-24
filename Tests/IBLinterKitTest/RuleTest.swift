@@ -24,5 +24,12 @@ class RuleTest: XCTestCase {
         let violations = rule.validate(xib: XibFile.init(path: path))
         XCTAssertEqual(violations.count, 2)
     }
+
+    func testDuplicateColors() {
+        let path = "Tests/IBLinterKitTest/Resources/DuplicateColor.xib"
+        let rule = Rules.DeprecateColorRule.init()
+        let violations = rule.validate(xib: XibFile.init(path: path))
+        XCTAssertEqual(violations.count, 1)
+    }
 }
 

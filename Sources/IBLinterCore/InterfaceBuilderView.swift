@@ -21,7 +21,7 @@ public protocol ViewProtocol {
     var subviews: [InterfaceBuilderNode.View]? { get }
     var translatesAutoresizingMaskIntoConstraints: Bool? { get }
     var userInteractionEnabled: Bool? { get }
-
+    var color: InterfaceBuilderNode.View.Color? { get }
 }
 
 extension InterfaceBuilderNode {
@@ -59,6 +59,7 @@ extension InterfaceBuilderNode {
         public var subviews: [InterfaceBuilderNode.View]? { return _view.subviews }
         public var translatesAutoresizingMaskIntoConstraints: Bool? { return _view.translatesAutoresizingMaskIntoConstraints }
         public var userInteractionEnabled: Bool? { return _view.userInteractionEnabled }
+        public var color: InterfaceBuilderNode.View.Color? { return _view.color }
 
         private var _view: ViewProtocol {
             switch self {
@@ -123,6 +124,7 @@ extension InterfaceBuilderNode {
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
             public let viewLayoutGuide: LayoutGuide?
+            public var color: InterfaceBuilderNode.View.Color?
 
             static func decode(_ xml: XMLIndexerProtocol) throws -> InterfaceBuilderNode.View.View {
                 return View.init(
@@ -139,7 +141,8 @@ extension InterfaceBuilderNode {
                     subviews:                                  xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
                     userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
-                    viewLayoutGuide:                           xml.byKey("viewLayoutGuide").flatMap(decodeValue)
+                    viewLayoutGuide:                           xml.byKey("viewLayoutGuide").flatMap(decodeValue),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
         }
@@ -162,6 +165,7 @@ extension InterfaceBuilderNode {
             public let subviews: [InterfaceBuilderNode.View]?
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
+            public let color: InterfaceBuilderNode.View.Color?
 
             static func decode(_ xml: XMLIndexerProtocol) throws -> InterfaceBuilderNode.View.StackView {
                 return StackView.init(
@@ -179,7 +183,8 @@ extension InterfaceBuilderNode {
                     rect:                                      try decodeValue(xml.byKey("rect")),
                     subviews:                                  xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled")
+                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
         }
@@ -203,6 +208,7 @@ extension InterfaceBuilderNode {
             public let subviews: [InterfaceBuilderNode.View]?
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
+            public let color: InterfaceBuilderNode.View.Color?
 
             static func decode(_ xml: XMLIndexerProtocol) throws -> InterfaceBuilderNode.View.ImageView {
                 return ImageView.init(
@@ -221,7 +227,8 @@ extension InterfaceBuilderNode {
                     rect:                                      try decodeValue(xml.byKey("rect")),
                     subviews:                                  xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled")
+                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
         }
@@ -251,7 +258,7 @@ extension InterfaceBuilderNode {
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
             public let verticalHuggingPriority: Int?
-
+            public let color: InterfaceBuilderNode.View.Color?
 
             static func decode(_ xml: XMLIndexerProtocol) throws -> InterfaceBuilderNode.View.Label {
                 return Label.init(
@@ -276,7 +283,8 @@ extension InterfaceBuilderNode {
                     textColor:                                 xml.byKey("color").flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
                     userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
-                    verticalHuggingPriority:                   xml.attributeValue(of: "verticalHuggingPriority")
+                    verticalHuggingPriority:                   xml.attributeValue(of: "verticalHuggingPriority"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
 
@@ -306,6 +314,7 @@ extension InterfaceBuilderNode {
             public let subviews: [InterfaceBuilderNode.View]?
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
+            public let color: InterfaceBuilderNode.View.Color?
 
             public enum DataMode: XMLAttributeDecodable {
                 case `static`, prototypes
@@ -342,7 +351,8 @@ extension InterfaceBuilderNode {
                     style:                                     xml.attributeValue(of: "style"),
                     subviews:                                  xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled")
+                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
         }
@@ -367,6 +377,7 @@ extension InterfaceBuilderNode {
             }
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
+            public let color: InterfaceBuilderNode.View.Color?
 
             public struct TableViewContentView: XMLDecodable, ViewProtocol {
                 public let id: String
@@ -384,6 +395,7 @@ extension InterfaceBuilderNode {
                 public let subviews: [InterfaceBuilderNode.View]?
                 public let translatesAutoresizingMaskIntoConstraints: Bool?
                 public let userInteractionEnabled: Bool?
+                public let color: InterfaceBuilderNode.View.Color?
 
                 static func decode(_ xml: XMLIndexerProtocol) throws -> InterfaceBuilderNode.View.TableViewCell.TableViewContentView {
                     return TableViewContentView.init(
@@ -399,7 +411,8 @@ extension InterfaceBuilderNode {
                         rect:                                      try decodeValue(xml.byKey("rect")),
                         subviews:                                  xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                         translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                        userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled")
+                        userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
+                        color: xml.byKey("color").flatMap(decodeValue)
                     )
                 }
             }
@@ -419,7 +432,8 @@ extension InterfaceBuilderNode {
                     rect:                                      try decodeValue(xml.byKey("rect")),
                     _subviews:                                  xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled")
+                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
         }
@@ -440,6 +454,7 @@ extension InterfaceBuilderNode {
             public let subviews: [InterfaceBuilderNode.View]?
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
+            public let color: InterfaceBuilderNode.View.Color?
 
             static func decode(_ xml: XMLIndexerProtocol) throws -> InterfaceBuilderNode.View.CollectionView {
                 return CollectionView.init(
@@ -456,7 +471,8 @@ extension InterfaceBuilderNode {
                     rect:                                      try decodeValue(xml.byKey("rect")),
                     subviews:                                  xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled")
+                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
         }
@@ -481,6 +497,7 @@ extension InterfaceBuilderNode {
             }
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
+            public let color: InterfaceBuilderNode.View.Color?
 
             static func decode(_ xml: XMLIndexerProtocol) throws -> InterfaceBuilderNode.View.CollectionViewCell {
                 return CollectionViewCell.init(
@@ -497,7 +514,8 @@ extension InterfaceBuilderNode {
                     rect:                                      try decodeValue(xml.byKey("rect")),
                     _subviews:                                 xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled")
+                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
         }
@@ -525,6 +543,7 @@ extension InterfaceBuilderNode {
             public let title: Title
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
+            public let color: InterfaceBuilderNode.View.Color?
 
             public struct Title: XMLDecodable {
                 public let disabled: String?
@@ -592,7 +611,9 @@ extension InterfaceBuilderNode {
                     textColor:                                 try decodeValue(xml),
                     title:                                     try decodeValue(xml),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled")
+                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
+                    // Maybe have a problem for the color of button
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
         }
@@ -618,6 +639,7 @@ extension InterfaceBuilderNode {
             public let subviews: [InterfaceBuilderNode.View]?
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
+            public let color: InterfaceBuilderNode.View.Color?
 
             public struct Segment: XMLDecodable {
                 public let title: String
@@ -646,7 +668,8 @@ extension InterfaceBuilderNode {
                     selectedSegmentIndex:                       xml.attributeValue(of: "selectedSegmentIndex"),
                     subviews:                                   xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints:  xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                    userInteractionEnabled:                     xml.attributeValue(of: "userInteractionEnabled")
+                    userInteractionEnabled:                     xml.attributeValue(of: "userInteractionEnabled"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
 
@@ -675,7 +698,8 @@ extension InterfaceBuilderNode {
             public let textAlignment: String?
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
-
+            public let color: InterfaceBuilderNode.View.Color?
+            
             static func decode(_ xml: XMLIndexerProtocol) throws -> InterfaceBuilderNode.View.TextField {
                 return TextField.init(
                     id:                                        try xml.attributeValue(of: "id"),
@@ -697,7 +721,8 @@ extension InterfaceBuilderNode {
                     subviews:                                  xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                     textAlignment:                             xml.attributeValue(of: "textAlignment"),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled")
+                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
 
@@ -728,6 +753,7 @@ extension InterfaceBuilderNode {
             public let textColor: Color?
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
+            public let color: InterfaceBuilderNode.View.Color?
 
             static func decode(_ xml: XMLIndexerProtocol) throws -> InterfaceBuilderNode.View.TextView {
                 return TextView.init(
@@ -752,7 +778,8 @@ extension InterfaceBuilderNode {
                     textAlignment:                             xml.attributeValue(of: "textAlignment"),
                     textColor:                                 xml.byKey("color").flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled")
+                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
         }
@@ -774,7 +801,7 @@ extension InterfaceBuilderNode {
             public let subviews: [InterfaceBuilderNode.View]?
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
-
+            public let color: InterfaceBuilderNode.View.Color?
 
             public struct BarButtonItem: XMLDecodable {
                 public let id: String
@@ -807,7 +834,8 @@ extension InterfaceBuilderNode {
                     rect:                                      try decodeValue(xml.byKey("rect")),
                     subviews:                                  xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled")
+                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
         }
@@ -834,6 +862,7 @@ extension InterfaceBuilderNode {
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
             public let verticalHuggingPriority: Int?
+            public let color: InterfaceBuilderNode.View.Color?
 
             static func decode(_ xml: XMLIndexerProtocol) throws -> InterfaceBuilderNode.View.Switch {
                 return Switch.init(
@@ -855,7 +884,8 @@ extension InterfaceBuilderNode {
                     subviews:                                  xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
                     userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
-                    verticalHuggingPriority:                   xml.attributeValue(of: "verticalHuggingPriority")
+                    verticalHuggingPriority:                   xml.attributeValue(of: "verticalHuggingPriority"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
         }
@@ -876,6 +906,7 @@ extension InterfaceBuilderNode {
             public let subviews: [InterfaceBuilderNode.View]?
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
+            public let color: InterfaceBuilderNode.View.Color?
 
             static func decode(_ xml: XMLIndexerProtocol) throws -> InterfaceBuilderNode.View.PickerView {
                 return PickerView.init(
@@ -891,7 +922,8 @@ extension InterfaceBuilderNode {
                     rect:                                      try decodeValue(xml.byKey("rect")),
                     subviews:                                  xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled")
+                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
         }
@@ -912,7 +944,8 @@ extension InterfaceBuilderNode {
             public let subviews: [InterfaceBuilderNode.View]?
             public let translatesAutoresizingMaskIntoConstraints: Bool?
             public let userInteractionEnabled: Bool?
-
+            public let color: InterfaceBuilderNode.View.Color?
+            
             static func decode(_ xml: XMLIndexerProtocol) throws -> InterfaceBuilderNode.View.ScrollView {
                 return ScrollView.init(
                     id:                                        try xml.attributeValue(of: "id"),
@@ -927,7 +960,8 @@ extension InterfaceBuilderNode {
                     rect:                                      try decodeValue(xml.byKey("rect")),
                     subviews:                                  xml.byKey("subviews")?.childrenNode.flatMap(decodeValue),
                     translatesAutoresizingMaskIntoConstraints: xml.attributeValue(of: "translatesAutoresizingMaskIntoConstraints"),
-                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled")
+                    userInteractionEnabled:                    xml.attributeValue(of: "userInteractionEnabled"),
+                    color: xml.byKey("color").flatMap(decodeValue)
                 )
             }
         }
